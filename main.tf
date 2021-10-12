@@ -21,9 +21,10 @@ resource "upcloud_server" "newvps" {
     user            = "root"
     #create_password = true
     #password_delivery = "none"
-    keys = [
-      file("/opt/terraform/id_rsa.pub")
-    ]
+    #keys = [
+    #  file("/opt/terraform/id_rsa.pub")
+    #]
+    keys = split("\n", chomp(file("/opt/terraform/id_rsa.pub")))
   }
 
   provisioner "remote-exec" {
